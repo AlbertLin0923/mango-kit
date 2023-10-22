@@ -1,0 +1,45 @@
+{
+  "name": "@mango-kit/utils",
+  "version": "0.0.1",
+  "description": "一些前端工具",
+  "keywords": [
+    "mango-kit",
+    "utils"
+  ],
+  "homepage": "https://github.com/AlbertLin0923/mango-kit/tree/main/packages/utils#readme",
+  "bugs": {
+    "url": "https://github.com/AlbertLin0923/mango-kit/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AlbertLin0923/mango-kit.git",
+    "directory": "packages/utils"
+  },
+  "license": "MIT",
+  "author": "AlbertLin0923",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "dev": "father dev",
+    "build": "father build",
+    "prepublishOnly": "pnpm run build"
+  },
+  "dependencies": {
+    "dayjs": "^1.11.10"
+  },
+  "devDependencies": {},
+  "peerDependencies": {},
+  "engines": {
+    "node": ">=16.0.0"
+  }
+}
