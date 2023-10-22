@@ -1,3 +1,10 @@
+## [0.0.2](https://github.com/AlbertLin0923/mango-kit/compare/@mango-kit/components@0.0.1...@mango-kit/components@0.0.2) (2023-10-22)
+
+
+### Bug Fixes
+
+* 修复样式文件导出问题 ([a57c75b](https://github.com/AlbertLin0923/mango-kit/commit/a57c75baa213c0f6b256376aa7d94ddd1ef36075))
+
 ## 0.0.1 (2023-10-22)
 
 
