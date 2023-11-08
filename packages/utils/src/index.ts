@@ -8,5 +8,6 @@ export {
   download,
 } from './tools/file'
 export { getLabel, getColor, matchLabel } from './tools/dict'
+export { default as compose } from './tools/compose'
 export { sleep } from './tools/helper'
 export { parseDate, parseCurrency, parseText } from './tools/parse'
