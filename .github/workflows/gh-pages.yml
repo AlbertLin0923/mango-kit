@@ -2,8 +2,8 @@ name: Deploy Docs
 
 on:
   push:
-    branches:
-      - main
+    paths:
+      - '**/*.md'
 
 jobs:
   deploy:
@@ -13,6 +13,15 @@ jobs:
         uses: actions/checkout@v3
         with:
           fetch-depth: 0
+
+      - name: Run Workflow if "docs" found
+      run: |
+        if git log -1 --pretty=%B | grep -qE '.*docs.*'; then
+          echo "Docs found in the commit message. Triggering workflow..."
+        else
+          echo "No docs found in the commit message. Skipping workflow."
+          exit 78  # exit with a neutral status code to indicate skipping the workflow
+        fi
 
       - name: Install pnpm
         uses: pnpm/action-setup@v2
