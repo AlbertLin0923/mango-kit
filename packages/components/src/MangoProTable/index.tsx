@@ -5,7 +5,6 @@ import {
   useImperativeHandle,
   forwardRef,
 } from 'react'
-import { useMount } from 'ahooks'
 import { useNavigate } from 'react-router-dom'
 import cx from 'classnames'
 import { Table, Space, Button, Typography, Alert, Spin, Empty, App } from 'antd'
@@ -279,9 +278,10 @@ export const MangoProTable = forwardRef<
     }
   }
 
-  useMount(() => {
+  useEffect(() => {
     getSearchOptions()
-  })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   useEffect(() => {
     if (pageType === 'table') {

@@ -34,32 +34,23 @@
   ],
   "scripts": {
     "build": "father build",
+    "clean": "rimraf node_modules/.cache",
     "dev": "father dev",
-    "prepublishOnly": "pnpm run build",
-    "clean": "rimraf node_modules/.cache"
+    "prepublishOnly": "pnpm run build"
   },
-  "dependencies": {},
-  "devDependencies": {
-    "@types/react": "^18.2.31",
-    "@types/react-dom": "^18.2.14",
-    "antd": "^5.8.4",
-    "classnames": "^2.3.2",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "ahooks": "^3.7.8",
+  "dependencies": {
     "dayjs": "^1.11.10",
-    "@mango-kit/utils": "^0.0.1",
-    "i18next": "^23.7.6",
-    "react-i18next": "^13.4.1",
+    "classnames": "^2.3.2",
     "lodash-es": "^4.17.21",
-    "@types/lodash-es": "^4.17.11",
-    "react-router-dom": "^6.4.1",
-    "@ant-design/icons": "^5.2.6"
+    "@ant-design/icons": "^5.2.6",
+    "@mango-kit/utils": "^0.0.1"
   },
+  "devDependencies": {},
   "peerDependencies": {
     "antd": ">=5.8.4",
     "react": ">=18",
-    "react-dom": ">=18"
+    "react-dom": ">=18",
+    "react-router-dom": ">=6.4.1"
   },
   "engines": {
     "node": ">=16.0.0"
