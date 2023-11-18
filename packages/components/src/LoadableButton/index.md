@@ -7,7 +7,7 @@ group:
 
 # LoadableButton
 
-自带loading效果的Antd Button
+自带`loading`效果的 `Antd Button`
 
 ## 代码演示
 

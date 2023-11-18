@@ -7,7 +7,7 @@ group:
 
 # LoadableSwitch
 
-自带loading效果的Antd Switch
+自带`loading`效果的 `Antd Switch`
 
 ## 代码演示
 
