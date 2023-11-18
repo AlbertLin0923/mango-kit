@@ -28,4 +28,4 @@ const LoadableSwitch: FC<LoadableSwitchProps> = ({
   )
 }
 
-export default LoadableSwitch
+export { LoadableSwitch }

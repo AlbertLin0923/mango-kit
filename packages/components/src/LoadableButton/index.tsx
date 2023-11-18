@@ -24,4 +24,4 @@ const LoadableButton: FC<LoadableButtonProps> = ({ onClick, ...restProps }) => {
   )
 }
 
-export default LoadableButton
+export { LoadableButton }

@@ -41,4 +41,9 @@ yarn-error.log*
 
 #turborepo
 .turbo
+
+#dumi
+.dumi/tmp
+.dumi/tmp-production
+/docs-dist
 # 以上同.gitignore

@@ -1,7 +1,7 @@
 {
   "name": "@mango-kit/utils",
   "version": "0.0.1",
-  "description": "一些前端工具",
+  "description": "一些前端工具函数",
   "keywords": [
     "mango-kit",
     "utils"
@@ -32,7 +32,8 @@
   "scripts": {
     "dev": "father dev",
     "build": "father build",
-    "prepublishOnly": "pnpm run build"
+    "prepublishOnly": "pnpm run build",
+    "clean": "rimraf node_modules/.cache"
   },
   "dependencies": {
     "dayjs": "^1.11.10"

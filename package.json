@@ -2,7 +2,7 @@
   "name": "mango-kit-monorepo",
   "version": "0.0.1",
   "private": true,
-  "description": "一些前端组件和工具",
+  "description": "前端开发工具包",
   "homepage": "https://github.com/AlbertLin0923/mango-kit",
   "bugs": {
     "url": "https://github.com/AlbertLin0923/mango-kit"
@@ -17,6 +17,8 @@
     "release": "dev-scripts releasePackage",
     "dev": "pnpm -r --filter './packages/**' run dev",
     "build": "pnpm -r --filter './packages/**' run build",
+    "docs:dev": "dumi dev",
+    "docs:build": "dumi build",
     "prepare": "husky install",
     "preinstall": "npx only-allow pnpm",
     "lint": "pnpm run lint:eslint && pnpm run lint:stylelint && pnpm run lint:prettier",
@@ -26,7 +28,8 @@
     "lint-staged": "lint-staged",
     "test-unit": "vitest run",
     "coverage": "vitest run --coverage",
-    "cz": "git add . && git cz"
+    "cz": "git add . && git cz",
+    "clean": "rimraf node_modules/.cache && pnpm -r --filter './packages/**' run clean"
   },
   "devDependencies": {
     "@commitlint/cli": "^17.7.1",

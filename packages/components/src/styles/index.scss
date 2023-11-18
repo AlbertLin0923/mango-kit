@@ -1,7 +1,238 @@
-.svg-icon {
+@import './variables.scss';
+@import './mixins.scss';
+
+.mango-svg-icon {
   width: 1em;
   height: 1em;
   overflow: hidden;
   vertical-align: -0.15em;
   fill: currentcolor;
+}
+
+.mango-status-node {
+  .mango-status-dot {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    margin-right: 8px;
+    border-radius: 50%;
+  }
+}
+
+.mango-radio-container {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+
+  &.mango-radio-btn-theme {
+    .mango-radio-item {
+      @include mango-center;
+
+      position: relative;
+      margin-right: 20px;
+      padding: 5px 15px;
+      text-align: center;
+      border: 1px solid #d9d9d9;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: all 0.2s;
+
+      &.mango-radio-item-selected {
+        color: $mango-primary-color;
+        border-color: $mango-primary-color;
+      }
+
+      &:hover {
+        color: $mango-primary-color;
+      }
+
+      .mango-radio-item-text {
+        width: 100%;
+      }
+    }
+  }
+
+  &.mango-radio-nav-theme {
+    .mango-radio-item {
+      position: relative;
+      display: flex;
+      align-items: center;
+      margin-right: 20px;
+      padding: 5px 15px;
+      text-align: center;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: all 0.2s;
+
+      &.mango-radio-item-selected {
+        color: $mango-primary-color;
+      }
+
+      &:hover {
+        color: $mango-primary-color;
+        background-color: $mango-default-bgcolor;
+      }
+
+      .mango-radio-item-text {
+        width: 100%;
+      }
+    }
+  }
+
+  &.mango-radio-tag-theme {
+    .mango-radio-item {
+      @include mango-center;
+
+      position: relative;
+      margin-right: 20px;
+      padding-right: 15px;
+      padding-left: 15px;
+      text-align: center;
+      border: 1px solid #d9d9d9;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: all 0.2s;
+
+      &.mango-radio-item-selected {
+        color: $mango-primary-color;
+        border-color: $mango-primary-color;
+      }
+
+      &:hover {
+        color: $mango-primary-color;
+      }
+
+      .mango-radio-item-tag {
+        position: absolute;
+        right: -1px;
+        bottom: -1px;
+        width: 16px;
+        height: 16px;
+      }
+
+      .mango-radio-item-icon {
+        margin-right: 6px;
+        font-size: 1.2em;
+      }
+
+      .mango-radio-item-text {
+        width: 100%;
+      }
+    }
+  }
+}
+
+.mango-number-container {
+  display: flex;
+  align-items: center;
+
+  .mango-number-input {
+    margin: 0 12px;
+
+    .ant-input-number-input {
+      text-align: center;
+    }
+  }
+
+  .mango-number-btn {
+    display: block;
+    width: 32px;
+    height: 32px;
+  }
+}
+
+.mango-pro-table-container {
+  &.mango-pro-table-table-theme {
+    @include mango-page-container;
+
+    .mango-pro-table-form-container {
+      @include mango-card-container;
+
+      margin-bottom: 16px;
+      padding-bottom: 0;
+
+      .mango-pro-table-tips-container {
+        margin-bottom: 16px;
+      }
+
+      .mango-pro-table-search-container {
+        padding-bottom: 0;
+
+        .mango-pro-table-search {
+          .ant-form-item {
+            margin-bottom: 16px;
+          }
+        }
+      }
+    }
+
+    .mango-pro-table-table-container {
+      @include mango-card-container;
+
+      flex: 1;
+
+      .mango-pro-table-toolbar-container {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        margin-bottom: 16px;
+      }
+
+      .mango-pro-table-column-actions {
+        display: flex;
+        align-items: center;
+
+        .ant-btn {
+          padding: 0;
+        }
+      }
+    }
+  }
+
+  &.mango-pro-table-card-theme {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+
+    .mango-pro-table-form-container {
+      display: block;
+    }
+
+    .mango-pro-table-loading-container {
+      width: 100%;
+      min-height: 300px;
+    }
+
+    .mango-pro-table-table-loading-container {
+      flex: 1;
+    }
+
+    .mango-pro-table-table-container {
+      flex: 1;
+      margin-top: 16px;
+
+      .table-loading-container {
+        width: 100%;
+        height: 100%;
+      }
+
+      &.mango-pro-table-wrap-table-container {
+        @include mango-card-container;
+      }
+
+      .mango-pro-table-content {
+        display: flex;
+        flex-wrap: wrap;
+      }
+
+      .mango-pro-table-empty-table-content {
+        width: 100%;
+        height: 100%;
+        background-color: #fff;
+
+        @include mango-center;
+      }
+    }
+  }
 }

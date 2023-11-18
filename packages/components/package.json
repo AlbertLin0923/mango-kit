@@ -35,7 +35,8 @@
   "scripts": {
     "build": "father build",
     "dev": "father dev",
-    "prepublishOnly": "pnpm run build"
+    "prepublishOnly": "pnpm run build",
+    "clean": "rimraf node_modules/.cache"
   },
   "dependencies": {},
   "devDependencies": {
@@ -44,7 +45,16 @@
     "antd": "^5.8.4",
     "classnames": "^2.3.2",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "ahooks": "^3.7.8",
+    "dayjs": "^1.11.10",
+    "@mango-kit/utils": "^0.0.1",
+    "i18next": "^23.7.6",
+    "react-i18next": "^13.4.1",
+    "lodash-es": "^4.17.21",
+    "@types/lodash-es": "^4.17.11",
+    "react-router-dom": "^6.4.1",
+    "@ant-design/icons": "^5.2.6"
   },
   "peerDependencies": {
     "antd": ">=5.8.4",

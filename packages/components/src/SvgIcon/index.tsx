@@ -9,7 +9,7 @@ const SvgIcon: FC<SvgIconProps> = ({ iconClass, className, ...restProps }) => {
   return (
     <svg
       aria-hidden="true"
-      className={className ? 'svg-icon ' + className : 'svg-icon'}
+      className={className ? 'mango-svg-icon ' + className : 'mango-svg-icon'}
       {...restProps}
     >
       <use href={`#icon-${iconClass}`} />
@@ -17,4 +17,4 @@ const SvgIcon: FC<SvgIconProps> = ({ iconClass, className, ...restProps }) => {
   )
 }
 
-export default SvgIcon
+export { SvgIcon }
