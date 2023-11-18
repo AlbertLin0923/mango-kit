@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkmango_kit_monorepo=self.webpackChunkmango_kit_monorepo||[]).push([[9],{67234:function(E,n,e){e.r(n);var o=e(5206),m=e(93236),D=e(94223),t=function(){var _=(0,o.UO)(),r=_.id,s=(0,o.WF)(),d=s.demos,u=d[r]||{},a=u.component;return a&&(0,m.createElement)(a)};n.default=t}}]);
