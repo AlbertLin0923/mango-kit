@@ -1,0 +1,29 @@
+{
+  "assets": {
+    "public/favicon.png": "/mango-kit/favicon.png",
+    "public/favicon.svg": "/mango-kit/favicon.svg",
+    "public/logo.png": "/mango-kit/logo.png",
+    "public/logo.svg": "/mango-kit/logo.svg",
+    "umi.css": "/mango-kit/umi.09180329.css",
+    "umi.js": "/mango-kit/umi.3162085b.js",
+    "LoadableButton__demos.js": "/mango-kit/LoadableButton__demos.452c3973.async.js",
+    "LoadableSwitch__demos.js": "/mango-kit/LoadableSwitch__demos.4122aa0c.async.js",
+    "MangoFormNumber__demos.js": "/mango-kit/MangoFormNumber__demos.ab8fffd9.async.js",
+    "MangoFormPassword__demos.js": "/mango-kit/MangoFormPassword__demos.0d0fd2f8.async.js",
+    "MangoFormRadio__demos.js": "/mango-kit/MangoFormRadio__demos.560b1138.async.js",
+    "MangoProTable__demos.js": "/mango-kit/MangoProTable__demos.4fa0bd28.async.js",
+    "nm__dumi__dist__client__pages__404.js": "/mango-kit/nm__dumi__dist__client__pages__404.5e5dfcfb.async.js",
+    "dumi__tmp-production__dumi__theme__ContextWrapper.js": "/mango-kit/dumi__tmp-production__dumi__theme__ContextWrapper.627eb96f.async.js",
+    "nm__dumi__theme-default__layouts__DocLayout__index.js": "/mango-kit/nm__dumi__theme-default__layouts__DocLayout__index.8871a94c.async.js",
+    "docs__components__index.md.js": "/mango-kit/docs__components__index.md.def5f9ab.async.js",
+    "docs__utils__index.md.js": "/mango-kit/docs__utils__index.md.b67db0df.async.js",
+    "docs__index.md.js": "/mango-kit/docs__index.md.f6e2f93b.async.js",
+    "packages__components__src__LoadableButton__index.md.js": "/mango-kit/packages__components__src__LoadableButton__index.md.8cd692df.async.js",
+    "packages__components__src__LoadableSwitch__index.md.js": "/mango-kit/packages__components__src__LoadableSwitch__index.md.6e5333f6.async.js",
+    "packages__components__src__MangoFormNumber__index.md.js": "/mango-kit/packages__components__src__MangoFormNumber__index.md.18465979.async.js",
+    "packages__components__src__MangoFormPassword__index.md.js": "/mango-kit/packages__components__src__MangoFormPassword__index.md.d55d0fc5.async.js",
+    "packages__components__src__MangoFormRadio__index.md.js": "/mango-kit/packages__components__src__MangoFormRadio__index.md.d8203f69.async.js",
+    "packages__components__src__MangoProTable__index.md.js": "/mango-kit/packages__components__src__MangoProTable__index.md.11aedbc4.async.js",
+    "nm__dumi__dist__client__pages__Demo__index.js": "/mango-kit/nm__dumi__dist__client__pages__Demo__index.0d62467e.async.js"
+  }
+}
