@@ -18,7 +18,7 @@
     "dev": "pnpm -r --filter './packages/**' run dev",
     "build": "pnpm -r --filter './packages/**' run build",
     "docs:dev": "dumi dev",
-    "docs:build": "dumi build",
+    "docs:build": "pnpm run build && dumi build",
     "prepare": "husky install",
     "preinstall": "npx only-allow pnpm",
     "lint": "pnpm run lint:eslint && pnpm run lint:stylelint && pnpm run lint:prettier",
