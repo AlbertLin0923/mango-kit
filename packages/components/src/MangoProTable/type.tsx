@@ -5,7 +5,7 @@ import type { ModalStaticFunctions } from 'antd/es/modal/confirm'
 import type { NotificationInstance } from 'antd/es/notification/interface'
 import type { InputProps, FormItemProps } from 'antd'
 import type { DatePickerProps, RangePickerProps } from 'antd/es/date-picker'
-import type { ColumnType } from 'antd/es/table'
+import type { TableProps } from 'antd'
 import type { Dayjs } from 'dayjs'
 
 type InputFieldType = {
@@ -128,7 +128,7 @@ export type ValueEnum =
       [key: string]: any
     }[])
 
-export type ColumnsType = ({
+export type ColumnsType = {
   title: string
   dataIndex: string
   align?: string
@@ -139,7 +139,8 @@ export type ColumnsType = ({
   render?: (text: any, record: any, index: number) => ReactNode
   valueType?: ValueType
   valueEnum?: ValueEnum
-} & ColumnType<Record<string, any>>)[]
+  [key: string]: any
+}[]
 
 export type ColumnActionsType = {
   width?: string | number
