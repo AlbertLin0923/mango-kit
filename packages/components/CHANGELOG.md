@@ -1,3 +1,10 @@
+## [0.0.7](https://github.com/AlbertLin0923/mango-kit/compare/@mango-kit/components@0.0.6...@mango-kit/components@0.0.7) (2023-11-20)
+
+
+### Features
+
+* release @mango-kit/components@0.0.6 ([5a669a9](https://github.com/AlbertLin0923/mango-kit/commit/5a669a91e139f36ce83eb0c1160329e6289b80ef))
+
 ## [0.0.6](https://github.com/AlbertLin0923/mango-kit/compare/@mango-kit/components@0.0.6...@mango-kit/components@0.0.6) (2023-11-20)
 
 ## [0.0.6](https://github.com/AlbertLin0923/mango-kit/compare/@mango-kit/components@0.0.5...@mango-kit/components@0.0.6) (2023-11-20)
