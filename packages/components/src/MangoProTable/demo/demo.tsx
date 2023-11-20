@@ -84,7 +84,7 @@ const Demo: FC = () => {
                     title: '录入新订单',
                     content: '请填写订单信息',
                     onOk: async () => {
-                      mangoProTableRef.current.refresh()
+                      mangoProTableRef?.current?.refresh()
                     },
                   })
                 },
@@ -142,7 +142,7 @@ const Demo: FC = () => {
               {
                 name: 'status',
                 label: '处理进度',
-                type: 'mango-form-radio',
+                type: 'radio',
                 initialValue: 1,
                 optionFilter: (data: any) => data?.statusMap,
                 immediate: true,

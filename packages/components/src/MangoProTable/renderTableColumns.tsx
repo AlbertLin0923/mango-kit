@@ -114,6 +114,7 @@ export const renderTableColumns = (
         render,
         valueType = 'text',
         valueEnum = [],
+        ...rest
       }) => {
         return {
           key: dataIndex,
@@ -134,6 +135,7 @@ export const renderTableColumns = (
                   valueEnum,
                   queryFormOptionData,
                 ),
+          ...rest,
         }
       },
     ) ?? []),

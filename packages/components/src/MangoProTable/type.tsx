@@ -3,7 +3,9 @@ import type { AlertProps, SelectProps } from 'antd'
 import type { MessageInstance } from 'antd/es/message/interface'
 import type { ModalStaticFunctions } from 'antd/es/modal/confirm'
 import type { NotificationInstance } from 'antd/es/notification/interface'
-import type { DatePickerProps, InputProps, FormItemProps } from 'antd'
+import type { InputProps, FormItemProps } from 'antd'
+import type { DatePickerProps, RangePickerProps } from 'antd/es/date-picker'
+import type { ColumnType } from 'antd/es/table'
 import type { Dayjs } from 'dayjs'
 
 type InputFieldType = {
@@ -45,7 +47,7 @@ type DatePickerFieldType = {
   label?: string
   initialValue?: Dayjs[]
   immediate?: boolean
-  extraRawFieldProps?: Omit<DatePickerProps, 'placeholder' | 'picker'>
+  extraRawFieldProps?: DatePickerProps
   extraFormFieldProps?: Omit<
     FormItemProps,
     'name' | 'label' | 'placeholder' | 'initialValue'
@@ -55,11 +57,11 @@ type DatePickerFieldType = {
 type DateRangePickerFieldType = {
   name: string
   type: 'date-range-picker'
-  picker: DatePickerProps['picker']
+  picker: RangePickerProps['picker']
   label?: string
   initialValue?: Dayjs[]
   immediate?: boolean
-  extraRawFieldProps?: Omit<DatePickerProps, 'placeholder' | 'picker'>
+  extraRawFieldProps?: RangePickerProps
   extraFormFieldProps?: Omit<
     FormItemProps,
     'name' | 'label' | 'placeholder' | 'initialValue'
@@ -119,25 +121,25 @@ export type ValueEnum =
       [key: string]: any
     }[]
   | string
-  | ((searchOptionsData: any) => {
+  | ((queryFormOptionData: any) => {
       label: string
       value: string | number
       color: string
       [key: string]: any
     }[])
 
-export type ColumnsType = {
+export type ColumnsType = ({
   title: string
   dataIndex: string
   align?: string
   width?: number | string
   ellipsis?: boolean
   copyable?: boolean
-  fixed?: boolean
+  fixed?: boolean | string
   render?: (text: any, record: any, index: number) => ReactNode
   valueType?: ValueType
   valueEnum?: ValueEnum
-}[]
+} & ColumnType<Record<string, any>>)[]
 
 export type ColumnActionsType = {
   width?: string | number
