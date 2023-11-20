@@ -7,7 +7,7 @@ group:
 
 # MangoFormPassword
 
-密码设置输入框
+自定义的密码设置组合框
 
 ## 代码演示
 
