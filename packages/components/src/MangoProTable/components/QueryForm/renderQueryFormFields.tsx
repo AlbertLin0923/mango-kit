@@ -74,6 +74,12 @@ export const renderQueryFormFields = (
     case 'date-picker':
       return (
         <Form.Item
+          getValueFromEvent={(value: any) => {
+            return value && value.valueOf()
+          }}
+          getValueProps={(value: any) => ({
+            value: value && dayjs(Number(value)),
+          })}
           label={col.label}
           name={col.name}
           {...col?.extraFormFieldProps}
@@ -81,7 +87,6 @@ export const renderQueryFormFields = (
           <DatePicker
             picker={col.picker}
             placeholder={col.placeholder}
-            style={{ width: '200px' }}
             allowClear
             {...col?.extraRawFieldProps}
           />

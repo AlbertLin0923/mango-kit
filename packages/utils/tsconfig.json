@@ -1,12 +1,4 @@
 {
-  "compilerOptions": {
-    "esModuleInterop": true,
-    "module": "ESNext",
-    "moduleResolution": "node",
-    "declaration": true,
-    "skipLibCheck": true,
-    "strict": true,
-    "target": "esnext"
-  },
+  "extends": "../../tsconfig.json",
   "include": ["src", "types"]
 }

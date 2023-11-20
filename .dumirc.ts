@@ -4,7 +4,7 @@ export default defineConfig({
   base: '/mango-kit',
   favicons: ['/mango-kit/favicon.png', '/mango-kit/favicon.svg'],
   mfsu: false,
-  monorepoRedirect: true,
+  monorepoRedirect: {},
   outputPath: 'docs-dist',
   publicPath: '/mango-kit/',
   resolve: {

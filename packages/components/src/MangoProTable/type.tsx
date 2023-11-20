@@ -38,6 +38,20 @@ type SelectFieldType = {
   >
 }
 
+type DatePickerFieldType = {
+  name: string
+  type: 'date-picker'
+  picker: DatePickerProps['picker']
+  label?: string
+  initialValue?: Dayjs[]
+  immediate?: boolean
+  extraRawFieldProps?: Omit<DatePickerProps, 'placeholder' | 'picker'>
+  extraFormFieldProps?: Omit<
+    FormItemProps,
+    'name' | 'label' | 'placeholder' | 'initialValue'
+  >
+}
+
 type DateRangePickerFieldType = {
   name: string
   type: 'date-range-picker'
@@ -45,7 +59,7 @@ type DateRangePickerFieldType = {
   label?: string
   initialValue?: Dayjs[]
   immediate?: boolean
-  extraRawFieldProps?: Omit<SelectProps, 'placeholder' | 'picker'>
+  extraRawFieldProps?: Omit<DatePickerProps, 'placeholder' | 'picker'>
   extraFormFieldProps?: Omit<
     FormItemProps,
     'name' | 'label' | 'placeholder' | 'initialValue'
@@ -86,6 +100,7 @@ type QueryFormFieldType =
   | InputFieldType
   | SelectFieldType
   | SelectFieldType
+  | DatePickerFieldType
   | DateRangePickerFieldType
   | RadioFieldType
   | TextFieldType

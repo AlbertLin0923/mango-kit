@@ -1,0 +1,22 @@
+{
+  "compilerOptions": {
+    "declaration": true,
+    "esModuleInterop": true,
+    "jsx": "react-jsx",
+    "module": "esnext",
+    "moduleResolution": "node",
+    "baseUrl": "./",
+    "paths": {
+      "@mango-kit/components": ["./packages/components/src/index.ts"],
+      "@mango-kit/components/styles": [
+        "./packages/components/src/style/index.scss"
+      ],
+      "@mango-kit/utils": ["./packages/utils/src/index.ts"]
+    },
+    "skipLibCheck": true,
+    "sourceMap": true,
+    "strict": true,
+    "target": "esnext"
+  },
+  "include": ["src", "types"]
+}
