@@ -1,3 +1,5 @@
+## [0.0.6](https://github.com/AlbertLin0923/mango-kit/compare/@mango-kit/components@0.0.6...@mango-kit/components@0.0.6) (2023-11-20)
+
 ## [0.0.6](https://github.com/AlbertLin0923/mango-kit/compare/@mango-kit/components@0.0.5...@mango-kit/components@0.0.6) (2023-11-20)
 
 
