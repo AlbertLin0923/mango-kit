@@ -145,20 +145,20 @@
   &.mango-pro-table-table-theme {
     @include mango-page-container;
 
-    .mango-pro-table-form-container {
+    .mango-pro-table-query-container {
       @include mango-card-container;
 
       margin-bottom: 16px;
       padding-bottom: 0;
 
-      .mango-pro-table-tips-container {
+      .mango-pro-table-query-tips-container {
         margin-bottom: 16px;
       }
 
-      .mango-pro-table-search-container {
+      .mango-pro-table-query-form-container {
         padding-bottom: 0;
 
-        .mango-pro-table-search {
+        .mango-pro-table-query-form {
           .ant-form-item {
             margin-bottom: 16px;
           }
@@ -171,14 +171,14 @@
 
       flex: 1;
 
-      .mango-pro-table-toolbar-container {
+      .mango-pro-table-table-toolbar-container {
         display: flex;
         align-items: center;
         justify-content: flex-end;
         margin-bottom: 16px;
       }
 
-      .mango-pro-table-column-actions {
+      .mango-pro-table-table-column-actions {
         display: flex;
         align-items: center;
 
@@ -195,7 +195,7 @@
     flex-direction: column;
     height: 100%;
 
-    .mango-pro-table-form-container {
+    .mango-pro-table-query-container {
       display: block;
     }
 

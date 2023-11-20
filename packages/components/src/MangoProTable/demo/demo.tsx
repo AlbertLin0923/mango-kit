@@ -27,7 +27,7 @@ const orderOriginMap = [
 ]
 
 const API = {
-  getSearchOptions: async () => {
+  getQuery: async () => {
     await sleep(1000)
     return {
       success: true,
@@ -38,12 +38,16 @@ const API = {
       msg: '请求成功',
     }
   },
-  getList: async () => {
+  getList: async (query: Record<string, any>) => {
     await sleep(1000)
+
+    const { pageSize, page } = query
+
+    console.log(pageSize, page)
     return {
       success: true,
       data: mockjs.mock({
-        'list|1-10': [
+        'list|5': [
           {
             orderNo: mockjs.Random.id(),
             status: statusMap[0]?.value,
@@ -113,8 +117,8 @@ const Demo: FC = () => {
               width: 120,
               valueType: 'map',
               ellipsis: true,
-              valueEnum: (searchOptionsData: any) => {
-                return searchOptionsData?.orderOriginMap
+              valueEnum: (queryFormOptionData: any) => {
+                return queryFormOptionData?.orderOriginMap
               },
             },
             {
@@ -133,18 +137,7 @@ const Demo: FC = () => {
             closable: true,
           }}
           pageType="table"
-          ref={mangoProTableRef}
-          request={{
-            getSearchOptions: {
-              api: API.getSearchOptions,
-              appendParams: { type: 1 },
-            },
-            getList: {
-              api: API.getList,
-            },
-          }}
-          rowKey="orderNo"
-          searchFormConfigList={[
+          queryFormFields={[
             [
               {
                 name: 'status',
@@ -171,6 +164,9 @@ const Demo: FC = () => {
                 initialValue: undefined,
                 placeholder: '请选择订单来源',
                 optionFilter: (data: any) => data?.orderOriginMap,
+                extraFormFieldProps: {
+                  tooltip: '下单的平台',
+                },
               },
               {
                 name: 'orderCreateTime',
@@ -178,9 +174,23 @@ const Demo: FC = () => {
                 type: 'date-range-picker',
                 picker: 'date',
                 initialValue: undefined,
+                extraRawFieldProps: {
+                  showTime: true,
+                },
               },
             ],
           ]}
+          ref={mangoProTableRef}
+          request={{
+            getQuery: {
+              api: API.getQuery,
+              appendParams: { type: 1 },
+            },
+            getList: {
+              api: API.getList,
+            },
+          }}
+          rowKey="orderNo"
           toolBarRender={() => {
             return (
               <Space>

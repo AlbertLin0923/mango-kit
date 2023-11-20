@@ -41,6 +41,7 @@ export type MangoControlRadioProps = PropsWithChildren<{
   theme?: Theme
   id?: string
   extraRender?: ReactNode
+  extraRawFieldProps?: Record<string, any>
 }>
 
 export const MangoControlRadio: FC<MangoControlRadioProps> = ({
@@ -57,6 +58,7 @@ export const MangoControlRadio: FC<MangoControlRadioProps> = ({
   theme = 'btn',
   id,
   extraRender,
+  extraRawFieldProps,
 }) => {
   const [selectedItem, setSelectedItem] = useState<MangoControlRadioItemType>()
 
@@ -83,6 +85,7 @@ export const MangoControlRadio: FC<MangoControlRadioProps> = ({
         containerClassName,
       )}
       id={id}
+      {...extraRawFieldProps}
     >
       <Space wrap={true}>
         {options.map((i) => {
@@ -123,7 +126,11 @@ export const MangoControlRadio: FC<MangoControlRadioProps> = ({
   )
 }
 
-export type MangoFormRadioProps = MangoControlRadioProps & FormItemProps
+export type MangoFormRadioProps = MangoControlRadioProps &
+  FormItemProps & {
+    extraFormFieldProps?: FormItemProps
+    extraRawFieldProps?: Record<string, any>
+  }
 
 export const MangoFormRadio: FC<MangoFormRadioProps> = ({
   options,
@@ -137,10 +144,12 @@ export const MangoFormRadio: FC<MangoFormRadioProps> = ({
   itemHeight,
   theme,
   extraRender,
+  extraFormFieldProps,
+  extraRawFieldProps,
   ...rest
 }) => {
   return (
-    <Form.Item {...rest}>
+    <Form.Item {...rest} {...extraFormFieldProps}>
       <MangoControlRadio
         {...{
           options,
@@ -154,6 +163,7 @@ export const MangoFormRadio: FC<MangoFormRadioProps> = ({
           itemHeight,
           theme,
           extraRender,
+          extraRawFieldProps,
         }}
       />
     </Form.Item>
