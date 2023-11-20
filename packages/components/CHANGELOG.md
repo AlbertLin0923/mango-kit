@@ -1,3 +1,10 @@
+## [0.0.8](https://github.com/AlbertLin0923/mango-kit/compare/@mango-kit/components@0.0.7...@mango-kit/components@0.0.8) (2023-11-20)
+
+
+### Bug Fixes
+
+* 修复Type类型定义错误 ([b4808bb](https://github.com/AlbertLin0923/mango-kit/commit/b4808bb2576c4c8585534750175bb945b6194868))
+
 ## [0.0.7](https://github.com/AlbertLin0923/mango-kit/compare/@mango-kit/components@0.0.6...@mango-kit/components@0.0.7) (2023-11-20)
 
 
