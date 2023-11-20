@@ -1,3 +1,10 @@
+## [0.0.6](https://github.com/AlbertLin0923/mango-kit/compare/@mango-kit/components@0.0.5...@mango-kit/components@0.0.6) (2023-11-20)
+
+
+### Features
+
+* 完善MangoProTable ([ac9d015](https://github.com/AlbertLin0923/mango-kit/commit/ac9d015f46605ee8e56711faa1974f541af1d207))
+
 ## [0.0.5](https://github.com/AlbertLin0923/mango-kit/compare/@mango-kit/components@0.0.4...@mango-kit/components@0.0.5) (2023-11-20)
 
 
