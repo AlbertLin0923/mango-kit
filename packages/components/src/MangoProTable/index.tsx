@@ -9,7 +9,8 @@ import { useNavigate } from 'react-router-dom'
 import cx from 'classnames'
 import { Table, Space, Button, Typography, Alert, Spin, Empty, App } from 'antd'
 import dayjs from 'dayjs'
-import { matchLabel, parseDate } from '@mango-kit/utils'
+import { matchLabel, parseDate, getLabel } from '@mango-kit/utils'
+import { isFunction, isArray, isString } from 'lodash-es'
 
 import Status from './components/Status'
 import SearchForm from './components/SearchForm'
@@ -25,7 +26,22 @@ import type { MessageInstance } from 'antd/es/message/interface'
 import type { ModalStaticFunctions } from 'antd/es/modal/confirm'
 import type { NotificationInstance } from 'antd/es/notification/interface'
 
-export type ValueType = 'text' | 'date' | 'dateTime'
+export type ValueType = 'text' | 'date' | 'dateTime' | 'status' | 'map'
+
+export type ValueEnum =
+  | {
+      label: string
+      value: string | number
+      color: string
+      [key: string]: any
+    }[]
+  | string
+  | ((searchOptionsData: any) => {
+      label: string
+      value: string | number
+      color: string
+      [key: string]: any
+    }[])
 
 export type ColumnsType = {
   title: string
@@ -35,13 +51,8 @@ export type ColumnsType = {
   ellipsis?: boolean
   copyable?: boolean
   render?: (text: any, record: any, index: number) => ReactNode
-  valueType?: string
-  valueEnum?: {
-    label: string
-    value: string | number
-    color: string
-    [key: string]: any
-  }[]
+  valueType?: ValueType
+  valueEnum?: ValueEnum
 }[]
 
 export type ColumnActionsType = {
@@ -62,7 +73,7 @@ export type ColumnActionsType = {
 }
 
 export type TablePaginationType = {
-  pageNum: number
+  page: number
   pageSize: number
 }
 
@@ -76,11 +87,19 @@ export type MangoProTableProps = {
   rowKey?: string
   request: {
     getSearchOptions?: {
-      api: (data?: any) => Promise<any>
+      api: (
+        searchData?: Record<string, any>,
+      ) => Promise<{ success: boolean; data: any }>
       appendParams?: Record<string, any>
     }
     getList: {
-      api: (data: any) => Promise<any>
+      api: (queryData: Record<string, any>) => Promise<{
+        success: boolean
+        data: {
+          list: any[]
+          total: number
+        }
+      }>
       appendParams?: Record<string, any>
     }
   }
@@ -133,39 +152,55 @@ const getInitSearchFormValue = (list: any[] | undefined) => {
 
 const renderText = (
   text: any,
-  ellipsis: any,
-  copyable: any,
-  valueType: string,
-  valueEnum: {
+  ellipsis: boolean,
+  copyable: boolean,
+  valueType: ValueType,
+  valueEnum: ValueEnum,
+  searchOptionsData: any,
+) => {
+  const wrapperText = (_text: ReactNode) => {
+    if (!ellipsis && !copyable) {
+      return _text
+    } else {
+      return (
+        <Typography.Text
+          copyable={copyable}
+          ellipsis={ellipsis ? { tooltip: _text } : false}
+        >
+          {_text}
+        </Typography.Text>
+      )
+    }
+  }
+
+  let valueEnumData: {
     label: string
     value: string | number
     color: string
     [key: string]: any
-  }[],
-) => {
-  if (valueEnum) {
-    return <Status map={valueEnum} value={text} />
-  }
+  }[] = []
 
-  if (valueType === 'date') {
-    return parseDate(text, 'YYYY-MM-DD')
-  }
-
-  if (valueType === 'dateTime') {
-    return parseDate(text)
-  }
-
-  if (!ellipsis && !copyable) {
-    return text
+  if (isFunction(valueEnum)) {
+    valueEnumData = valueEnum(searchOptionsData)
+  } else if (isArray(valueEnum)) {
+    valueEnumData = valueEnum
+  } else if (isString(valueEnum)) {
+    valueEnumData = searchOptionsData?.[valueEnum] ?? []
   } else {
-    return (
-      <Typography.Text
-        copyable={copyable}
-        ellipsis={ellipsis ? { tooltip: text } : false}
-      >
-        {text}
-      </Typography.Text>
-    )
+    valueEnumData = []
+  }
+
+  switch (valueType) {
+    case 'status':
+      return wrapperText(<Status map={valueEnumData} value={text} />)
+    case 'map':
+      return wrapperText(getLabel(text, valueEnumData))
+    case 'date':
+      return wrapperText(parseDate(text, 'YYYY-MM-DD'))
+    case 'dateTime':
+      return wrapperText(parseDate(text))
+    default:
+      return wrapperText(text)
   }
 }
 
@@ -193,21 +228,21 @@ export const MangoProTable = forwardRef<
   const { modal, message, notification } = App.useApp()
 
   const [searchOptions, setSearchOptions] = useState<SearchOptionsType>({
-    already: false,
     data: [],
+    already: false,
   })
 
   const [tablePagination, setTablePagination] = useState<TablePaginationType>({
+    page: 1,
     pageSize: 5,
-    pageNum: 1,
   })
 
   const [tableData, setTableData] = useState<{
-    rows: any[]
+    list: any[]
     total: number
     already: boolean
   }>({
-    rows: [],
+    list: [],
     total: 0,
     already: false,
   })
@@ -227,7 +262,7 @@ export const MangoProTable = forwardRef<
   ) => {
     setSearchFormValue(() => values)
     if (triggerRequest) {
-      const newTb = { ...tablePagination, pageNum: 1 }
+      const newTb = { ...tablePagination, page: 1 }
       setTablePagination(() => ({ ...newTb }))
       getList(values, newTb)
     }
@@ -235,10 +270,10 @@ export const MangoProTable = forwardRef<
 
   const getSearchOptions = async () => {
     if (request?.getSearchOptions && request?.getSearchOptions?.api) {
-      const { code, data } = await request.getSearchOptions.api({
+      const { success, data } = await request.getSearchOptions.api({
         ...(request?.getSearchOptions?.appendParams ?? {}),
       })
-      if (code === 200 && data) {
+      if (success && data) {
         setSearchOptions(() => ({ data, already: true }))
       }
     }
@@ -249,6 +284,7 @@ export const MangoProTable = forwardRef<
     _tablePagination?: TablePaginationType,
   ) => {
     setTableLoading(true)
+
     let delivery: Record<string, any> = {}
     Object.entries({
       ..._searchFormValue,
@@ -270,11 +306,16 @@ export const MangoProTable = forwardRef<
     }
 
     if (request?.getList?.api) {
-      const { rows = [], total = 0 } = await request.getList.api(delivery)
-
-      console.log(await request.getList.api(delivery))
+      const {
+        data: { list = [], total = 0 },
+        success = true,
+      } = await request.getList.api(delivery)
       setTableLoading(false)
-      setTableData(() => ({ rows, total, already: true }))
+      if (success) {
+        setTableData(() => ({ list, total, already: true }))
+      } else {
+        setTableData(() => ({ list: [], total: 0, already: true }))
+      }
     }
   }
 
@@ -336,6 +377,7 @@ export const MangoProTable = forwardRef<
               width,
               ellipsis = false,
               copyable = false,
+              fixed,
               render,
               valueType = 'text',
               valueEnum,
@@ -348,10 +390,18 @@ export const MangoProTable = forwardRef<
               align,
               width,
               ellipsis,
+              fixed,
               render: render
                 ? render
                 : (text: any) =>
-                    renderText(text, ellipsis, copyable, valueType, valueEnum),
+                    renderText(
+                      text,
+                      ellipsis,
+                      copyable,
+                      valueType,
+                      valueEnum,
+                      searchOptions?.data,
+                    ),
             }
           }) ?? []),
           columnActions
@@ -369,7 +419,7 @@ export const MangoProTable = forwardRef<
       : []
 
   const paginationConfig = {
-    current: tablePagination.pageNum,
+    current: tablePagination.page,
     pageSize: tablePagination.pageSize,
     defaultPageSize: 5,
     total: tableData.total,
@@ -377,8 +427,8 @@ export const MangoProTable = forwardRef<
     showQuickJumper: true,
     showSizeChanger: true,
     showTotal: (total: number) => `共 ${total} 条`,
-    onChange: (pageNum: number, pageSize: number) => {
-      const newTb = { pageNum, pageSize }
+    onChange: (page: number, pageSize: number) => {
+      const newTb = { page, pageSize }
       setTablePagination(() => ({ ...newTb }))
       getList(searchFormValue, newTb)
     },
@@ -438,7 +488,7 @@ export const MangoProTable = forwardRef<
               )}
               <Table
                 columns={_columns}
-                dataSource={tableData.rows}
+                dataSource={tableData?.list}
                 loading={tableLoading}
                 pagination={{ ...paginationConfig }}
                 rowKey={(row: any) => row[rowKey]}
@@ -480,9 +530,9 @@ export const MangoProTable = forwardRef<
         >
           {tableData?.already ? (
             <>
-              {tableData?.rows?.length > 0 ? (
+              {tableData?.list?.length > 0 ? (
                 <div className="mango-pro-table-content">
-                  {tableData?.rows?.map((i) => {
+                  {tableData?.list?.map((i) => {
                     return renderTableItem && renderTableItem(i)
                   })}
                 </div>

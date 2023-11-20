@@ -37,6 +37,7 @@
     "@mango-scripts/dev-scripts": "^2.0.5",
     "@mango-scripts/esp-config": "^2.0.3",
     "@types/lodash-es": "^4.17.11",
+    "@types/mockjs": "^1.0.10",
     "@types/node": "^18.15.5",
     "@types/react": "^18.2.31",
     "@types/react-dom": "^18.2.14",
@@ -60,5 +61,8 @@
   "engines": {
     "node": ">=18.15.0",
     "pnpm": "=7.29.3"
+  },
+  "dependencies": {
+    "mockjs": "^1.1.0"
   }
 }

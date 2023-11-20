@@ -2,47 +2,60 @@ import { useRef } from 'react'
 import { MangoProTable } from '@mango-kit/components'
 import { sleep } from '@mango-kit/utils'
 import '@mango-kit/components/styles'
-import dayjs from 'dayjs'
 import { ConfigProvider, Button, Space, App } from 'antd'
 import zh_CN from 'antd/es/locale/zh_CN'
+import mockjs from 'mockjs'
 
 import type { MangoProTableHandle } from '@mango-kit/components'
 
-const nodeMap = [
+const statusMap = [
   { label: '待处理', value: 1, color: '#FA8C16' },
   { label: '处理中', value: 2, color: '#2492FF' },
   { label: '已处理', value: 3, color: '#52C41A' },
+]
+
+const orderOriginMap = [
+  { label: '天猫', value: 1, color: '#FA8C16' },
+  { label: '淘宝', value: 2, color: '#2492FF' },
+  { label: '小程序', value: 3, color: '#52C41A' },
+  {
+    label:
+      '这是一个超长的text，这是一个超长的text，这是一个超长的text，这是一个超长的text，这是一个超长的text，这是一个超长的text，这是一个超长的text，这是一个超长的text，这是一个超长的text',
+    value: 4,
+    color: '#52C41A',
+  },
 ]
 
 const API = {
   getSearchOptions: async () => {
     await sleep(1000)
     return {
-      code: 200,
+      success: true,
       data: {
-        nodeCode: [
-          { label: '待处理', value: 1, color: '#FA8C16' },
-          { label: '处理中', value: 2, color: '#2492FF' },
-          { label: '已处理', value: 3, color: '#52C41A' },
-        ],
-        orderOriginList: [
-          { label: '天猫', value: 1, color: '#FA8C16' },
-          { label: '淘宝', value: 2, color: '#2492FF' },
-          { label: '小程序', value: 3, color: '#52C41A' },
-        ],
+        statusMap: statusMap,
+        orderOriginMap: orderOriginMap,
       },
+      msg: '请求成功',
     }
   },
   getList: async () => {
     await sleep(1000)
     return {
-      code: 200,
-      rows: new Array(5).fill(undefined).map((i) => ({
-        orderNo: Math.random().toString(36).substring(3, 19),
-        createTime: dayjs().format('YYYY-MM-DD HH:mm:ss'),
-        nodeCode: nodeMap[0]?.value,
-      })),
-      total: 100,
+      success: true,
+      data: mockjs.mock({
+        'list|1-10': [
+          {
+            orderNo: mockjs.Random.id(),
+            status: statusMap[0]?.value,
+            orderOrigin: function () {
+              return orderOriginMap[0].value
+            },
+            createTime: mockjs.Random.datetime(),
+          },
+        ],
+        total: 100,
+      }),
+      msg: '请求成功',
     }
   },
 }
@@ -56,15 +69,13 @@ const Demo: FC = () => {
           columnActions={{
             width: 120,
             showAliasConfig: {
-              key: 'nodeCode',
-              map: nodeMap,
+              key: 'status',
+              map: statusMap,
             },
             list: [
               {
                 title: '去处理',
                 action: (record: any, navigate: any) => {
-                  // navigate(`/detail?id=${record.id}pageType=modify`)
-                  // mangoProTableRef.current.refresh()
                   mangoProTableRef?.current?.modal?.confirm({
                     title: '录入新订单',
                     content: '请填写订单信息',
@@ -92,15 +103,27 @@ const Demo: FC = () => {
               copyable: true,
             },
             {
-              title: '下单时间',
+              title: '创建时间',
               dataIndex: 'createTime',
               width: 200,
             },
             {
-              title: '订单处理进度',
-              dataIndex: 'nodeCode',
+              title: '订单来源',
+              dataIndex: 'orderOrigin',
               width: 120,
-              valueEnum: nodeMap,
+              valueType: 'map',
+              ellipsis: true,
+              valueEnum: (searchOptionsData: any) => {
+                return searchOptionsData?.orderOriginMap
+              },
+            },
+            {
+              title: '订单处理进度',
+              dataIndex: 'status',
+              width: 120,
+              fixed: 'right',
+              valueType: 'status',
+              valueEnum: statusMap,
             },
           ]}
           pageTips={{
@@ -124,11 +147,11 @@ const Demo: FC = () => {
           searchFormConfigList={[
             [
               {
-                name: 'nodeCode',
+                name: 'status',
                 label: '处理进度',
-                type: 'mango-radio',
-                initialValue: '',
-                optionFilter: (data: any) => data?.nodeCodeList,
+                type: 'mango-form-radio',
+                initialValue: 1,
+                optionFilter: (data: any) => data?.statusMap,
                 immediate: true,
               },
             ],
@@ -147,7 +170,7 @@ const Demo: FC = () => {
                 type: 'select',
                 initialValue: undefined,
                 placeholder: '请选择订单来源',
-                optionFilter: (data: any) => data?.orderOriginList,
+                optionFilter: (data: any) => data?.orderOriginMap,
               },
               {
                 name: 'orderCreateTime',
@@ -161,33 +184,10 @@ const Demo: FC = () => {
           toolBarRender={() => {
             return (
               <Space>
-                <Button
-                  key="button"
-                  type="primary"
-                  onClick={() => {
-                    // mangoProTableRef?.current?.modal?.confirm({
-                    //   title: '录入新订单',
-                    //   content: '请填写订单信息',
-                    //   onOk: async () => {
-                    //     mangoProTableRef.current.refresh()
-                    //   },
-                    // })
-                  }}
-                >
+                <Button key="button" type="primary" onClick={() => {}}>
                   新建订单
                 </Button>
-                <Button
-                  key="button"
-                  onClick={() => {
-                    // mangoProTableRef?.current?.modal?.confirm({
-                    //   title: '录入新订单',
-                    //   content: '请填写订单信息',
-                    //   onOk: async () => {
-                    //     mangoProTableRef.current.refresh()
-                    //   },
-                    // })
-                  }}
-                >
+                <Button key="button" onClick={() => {}}>
                   批量下载数据
                 </Button>
               </Space>
