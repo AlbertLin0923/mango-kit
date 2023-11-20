@@ -1,3 +1,10 @@
+## [0.0.4](https://github.com/AlbertLin0923/mango-kit/compare/@mango-kit/components@0.0.3...@mango-kit/components@0.0.4) (2023-11-20)
+
+
+### Features
+
+* 完善MangoProTable列表字段ValueType ([c4d67ac](https://github.com/AlbertLin0923/mango-kit/commit/c4d67ac413f7d3dbc91f679f8207bc7496aee14f))
+
 ## [0.0.3](https://github.com/AlbertLin0923/mango-kit/compare/@mango-kit/components@0.0.2...@mango-kit/components@0.0.3) (2023-11-18)
 
 
