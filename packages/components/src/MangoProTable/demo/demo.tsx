@@ -107,7 +107,7 @@ const Demo: FC = () => {
               copyable: true,
             },
             {
-              title: '创建时间',
+              title: '订单创建时间',
               dataIndex: 'createTime',
               width: 200,
             },

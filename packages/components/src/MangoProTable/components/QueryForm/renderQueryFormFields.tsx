@@ -87,6 +87,11 @@ export const renderQueryFormFields = (
           <DatePicker
             picker={col.picker}
             placeholder={col.placeholder}
+            presets={[
+              { label: '昨天', value: dayjs().add(-1, 'd') },
+              { label: '上周', value: dayjs().add(-7, 'd') },
+              { label: '上月', value: dayjs().add(-1, 'month') },
+            ]}
             allowClear
             {...col?.extraRawFieldProps}
           />
@@ -109,7 +114,20 @@ export const renderQueryFormFields = (
           <DatePicker.RangePicker
             picker={col.picker}
             placeholder={col.placeholder}
-            // style={{ width: '200px' }}
+            presets={[
+              {
+                label: '今天',
+                value: [dayjs().startOf('day'), dayjs().endOf('day')],
+              },
+              {
+                label: '本周',
+                value: [dayjs().startOf('week'), dayjs().endOf('week')],
+              },
+              {
+                label: '本月',
+                value: [dayjs().startOf('month'), dayjs().endOf('month')],
+              },
+            ]}
             allowClear
             {...col?.extraRawFieldProps}
           />
@@ -129,7 +147,6 @@ export const renderQueryFormFields = (
           label={col.label}
           name={col.name}
           options={radioOptions ?? []}
-          style={{ width: '200px' }}
           theme="nav"
         />
       )

@@ -12,7 +12,11 @@ const Demo: FC = () => {
         console.log(v)
       }}
     >
-      <MangoFormPassword />
+      <MangoFormPassword
+        label={['新密码', '确认密码']}
+        popoverProps={{ placement: 'top' }}
+        widthLabel
+      />
     </Form>
   )
 }

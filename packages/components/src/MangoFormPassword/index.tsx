@@ -1,6 +1,8 @@
 import { useState } from 'react'
 import { Form, Input, Progress, Popover } from 'antd'
 
+import type { PopoverProps } from 'antd'
+
 const isPassword = (string: string): boolean => {
   return /^(?![a-zA-Z]+$)(?!\d+$)(?![^\da-zA-Z\s]+$).{8,20}$/.test(string)
 }
@@ -19,30 +21,35 @@ const isPasswordStrongly = (
   }
 }
 
+const passwordStrengthMap = {
+  success: {
+    text: '强',
+    percent: 100,
+  },
+  normal: {
+    text: '中',
+    percent: 70,
+  },
+  exception: {
+    text: '弱',
+    percent: 30,
+  },
+}
+
 export type MangoFormPasswordProps = {
   widthLabel?: boolean
-  label?: string
+  label?: [string, string]
+  widthConfirm?: boolean
+  popoverProps?: PopoverProps
 }
 
 export const MangoFormPassword: FC<MangoFormPasswordProps> = ({
   widthLabel = false,
-  label,
+  label = [],
+  widthConfirm = true,
+  popoverProps,
 }) => {
   const [popoverVisible, setPopoverVisible] = useState<boolean>(false)
-  const passwordStrengthMap = {
-    success: {
-      text: '强',
-      percent: 100,
-    },
-    normal: {
-      text: '中',
-      percent: 70,
-    },
-    exception: {
-      text: '弱',
-      percent: 30,
-    },
-  }
 
   return (
     <>
@@ -87,9 +94,10 @@ export const MangoFormPassword: FC<MangoFormPasswordProps> = ({
         }
         open={popoverVisible}
         placement="top"
+        {...popoverProps}
       >
         <Form.Item
-          label={widthLabel ? label || '密码' : null}
+          label={widthLabel ? label[0] || '密码' : null}
           name="password"
           normalize={(value: any) => {
             return value.trim()
@@ -110,10 +118,8 @@ export const MangoFormPassword: FC<MangoFormPasswordProps> = ({
             () => ({
               validator(_, value) {
                 if (!value) {
-                  setPopoverVisible(false)
                   return Promise.resolve()
                 } else {
-                  setPopoverVisible(true)
                   if (!isPassword(value)) {
                     return Promise.reject(
                       new Error(
@@ -135,40 +141,50 @@ export const MangoFormPassword: FC<MangoFormPasswordProps> = ({
             onBlur={() => {
               setPopoverVisible(false)
             }}
+            onFocus={() => {
+              setPopoverVisible(true)
+            }}
           />
         </Form.Item>
       </Popover>
-      <Form.Item
-        dependencies={['password']}
-        name="repeatPassword"
-        normalize={(value: any) => {
-          return value.trim()
-        }}
-        rules={[
-          {
-            required: true,
-            message: '请再次输入密码',
-          },
-          {
-            min: 8,
-            message: '密码最小长度为8',
-          },
-          {
-            max: 20,
-            message: '密码最大长度为20',
-          },
-          (_form) => ({
-            validator(_, value) {
-              if (!value || _form.getFieldValue('password') === value) {
-                return Promise.resolve()
-              }
-              return Promise.reject(new Error('两次输入密码不匹配'))
+      {widthConfirm && (
+        <Form.Item
+          dependencies={['password']}
+          label={widthLabel ? label[1] || '确认密码' : null}
+          name="confirmPassword"
+          normalize={(value: any) => {
+            return value.trim()
+          }}
+          rules={[
+            {
+              required: true,
+              message: '请再次输入密码',
             },
-          }),
-        ]}
-      >
-        <Input.Password maxLength={20} placeholder="请再次输入密码" />
-      </Form.Item>
+            {
+              min: 8,
+              message: '密码最小长度为8',
+            },
+            {
+              max: 20,
+              message: '密码最大长度为20',
+            },
+            (_form) => ({
+              validator(_, value) {
+                if (!value || _form.getFieldValue('password') === value) {
+                  return Promise.resolve()
+                }
+                return Promise.reject(new Error('两次输入密码不匹配'))
+              },
+            }),
+          ]}
+        >
+          <Input.Password
+            maxLength={20}
+            placeholder="请再次输入密码"
+            allowClear
+          />
+        </Form.Item>
+      )}
     </>
   )
 }
