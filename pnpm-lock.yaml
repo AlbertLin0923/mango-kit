@@ -231,8 +231,10 @@ importers:
   packages/utils:
     specifiers:
       dayjs: ^1.11.10
+      mathjs: ^12.1.0
     dependencies:
       dayjs: 1.11.10
+      mathjs: 12.1.0
 
 packages:
 
@@ -15140,6 +15142,22 @@ packages:
   /mathjs/11.11.2:
     resolution: {integrity: sha512-SL4/0Fxm9X4sgovUpJTeyVeZ2Ifnk4tzLPTYWDyR3AIx9SabnXYqtCkyJtmoF3vZrDPKGkLvrhbIL4YN2YbXLQ==}
     engines: {node: '>= 14'}
+    hasBin: true
+    dependencies:
+      '@babel/runtime': 7.23.2
+      complex.js: 2.1.1
+      decimal.js: 10.4.3
+      escape-latex: 1.2.0
+      fraction.js: 4.3.4
+      javascript-natural-sort: 0.7.1
+      seedrandom: 3.0.5
+      tiny-emitter: 2.1.0
+      typed-function: 4.1.1
+    dev: false
+
+  /mathjs/12.1.0:
+    resolution: {integrity: sha512-x5wUkWo3CfXMl4mf/jHsbVNuMcUwN2m4qbj+tR/jYr9fdiIrlsexQbKYav8Uwfe+E5he30CyVaABNLmAlTFO3w==}
+    engines: {node: '>= 18'}
     hasBin: true
     dependencies:
       '@babel/runtime': 7.23.2

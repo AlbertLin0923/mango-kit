@@ -11,3 +11,11 @@ export { getLabel, getColor, matchLabel } from './tools/dict'
 export { default as compose } from './tools/compose'
 export { sleep } from './tools/helper'
 export { parseDate, parseCurrency, parseText } from './tools/parse'
+export {
+  add,
+  subtract,
+  multiply,
+  divide,
+  toPercent,
+  toPrice,
+} from './tools/math'

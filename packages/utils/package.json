@@ -36,7 +36,8 @@
     "clean": "rimraf node_modules/.cache"
   },
   "dependencies": {
-    "dayjs": "^1.11.10"
+    "dayjs": "^1.11.10",
+    "mathjs": "^12.1.0"
   },
   "devDependencies": {},
   "peerDependencies": {},
