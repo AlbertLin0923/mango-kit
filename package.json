@@ -48,6 +48,7 @@
     "antd": "^5.8.4",
     "commitizen": "^4.3.0",
     "cz-conventional-changelog": "^3.3.0",
+    "conventional-changelog-cli": "^4.1.0",
     "dumi": "^2.2.13",
     "eslint": "^8.53.0",
     "father": "^4.3.7",
