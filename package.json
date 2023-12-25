@@ -38,10 +38,10 @@
     "@commitlint/cli": "^18.4.3",
     "@commitlint/config-conventional": "^18.4.3",
     "@mango-scripts/dev-scripts": "^2.0.7",
-    "@mango-scripts/esp-config": "^2.0.5",
+    "@mango-scripts/esp-config": "^2.0.7",
     "@types/lodash-es": "^4.17.12",
     "@types/mockjs": "^1.0.10",
-    "@types/node": "^18.15.5",
+    "@types/node": "^20.10.5",
     "@types/react": "^18.2.42",
     "@types/react-dom": "^18.2.17",
     "@vitest/coverage-v8": "^1.0.1",
@@ -50,21 +50,21 @@
     "conventional-changelog-cli": "^4.1.0",
     "cz-conventional-changelog": "^3.3.0",
     "dumi": "^2.2.14",
-    "eslint": "^8.55.0",
+    "eslint": "^8.56.0",
     "father": "^4.3.7",
     "husky": "^8.0.3",
     "lint-staged": "^15.2.0",
-    "prettier": "^3.1.0",
+    "prettier": "^3.1.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.4.1",
-    "stylelint": "^15.11.0",
+    "stylelint": "^16.1.0",
     "tsx": "^4.6.2",
     "typescript": "^5.3.2",
     "vitest": "^1.0.1"
   },
   "engines": {
-    "node": ">=18.15.0",
-    "pnpm": "=7.29.3"
+    "node": ">=20.10.0",
+    "pnpm": "=8.12.1"
   }
 }
