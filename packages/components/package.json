@@ -52,6 +52,6 @@
     "react-router-dom": ">=6.4.1"
   },
   "engines": {
-    "node": ">=18.12.0"
+    "node": ">=18"
   }
 }
