@@ -3,25 +3,29 @@ name: Publish Package
 on:
   push:
     tags:
-      - 'v*' # Push events to matching v*, i.e. v1.0, v20.15.10
+      - 'v*' # Push events to matching v*, i.e. v1.0, v20.16.10
       - '@mango-kit/**' # Push events to matching @mango-kit*, i.e. @mango-kit@components
+
+permissions:
+  id-token: write # Required for OIDC
+  contents: read
 
 jobs:
   publish:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v6
 
       - name: Install pnpm
-        uses: pnpm/action-setup@v2
+        uses: pnpm/action-setup@v4
         with:
-          version: 8.12.1
+          version: 9.6.0
 
-      - name: Set node version to 20.10.0
-        uses: actions/setup-node@v3
+      - name: Set node version to 20.16.0
+        uses: actions/setup-node@v6
         with:
-          node-version: 20.10.0
+          node-version: 20.16.0
           registry-url: https://registry.npmjs.org/
           cache: 'pnpm'
 
@@ -30,5 +34,3 @@ jobs:
 
       - name: Publish Package
         run: pnpm run release --tag ${{ github.ref_name }}
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
